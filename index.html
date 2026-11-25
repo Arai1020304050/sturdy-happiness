@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f1">
+  <meta name="description" content="海辺の景色も、にぎやかな街も。船橋の魅力を見つける小さなガイドです。">
+  <title>ふなばし日和 | 船橋のまちを歩こう</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #203b38;
+      --muted: #64736d;
+      --green: #376d5b;
+      --green-dark: #285447;
+      --mint: #e6eee6;
+      --cream: #f6f7f1;
+      --coral: #e58b6e;
+      --yellow: #f4cd74;
+      --white: #fffefa;
+      --serif: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+      --sans: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid var(--coral);
+      outline-offset: 4px;
+    }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+    .site-header {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(1280px, calc(100% - 64px));
+      margin: auto;
+      padding: 23px 0;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      font-family: var(--sans);
+      font-size: 16px;
+    }
+    .nav { display: flex; gap: 30px; align-items: center; }
+    .nav a {
+      color: var(--ink);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-decoration: none;
+    }
+    .nav a:hover { color: var(--green); }
+
+    .hero {
+      position: relative;
+      min-height: 600px;
+      overflow: hidden;
+      background: #e9f0e9;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      min-height: 600px;
+      padding: 45px 0 90px;
+    }
+    .hero-copy { width: 48%; padding-bottom: 12px; }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin: 0 0 21px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .2em;
+    }
+    .eyebrow::before { width: 25px; height: 1px; background: currentColor; content: ""; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 20px;
+      font-family: var(--serif);
+      font-size: clamp(42px, 5.2vw, 68px);
+      font-weight: 500;
+      letter-spacing: .08em;
+      line-height: 1.45;
+    }
+    h1 span { color: var(--green); }
+    .hero-description { max-width: 390px; margin-bottom: 29px; color: #53665e; font-size: 14px; }
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-decoration: none;
+    }
+    .text-link span {
+      display: grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      border: 1px solid #9bb2a4;
+      border-radius: 50%;
+      transition: transform .2s ease;
+    }
+    .text-link:hover span { transform: translateX(4px); }
+    .hero-art {
+      position: absolute;
+      top: 0;
+      right: -2%;
+      width: 61%;
+      height: 100%;
+    }
+    .hero-art svg { width: 100%; height: 100%; }
+    .hero-note {
+      position: absolute;
+      right: max(32px, calc((100vw - 1120px) / 2));
+      bottom: 30px;
+      color: #60736a;
+      font-family: var(--serif);
+      font-size: 11px;
+      letter-spacing: .16em;
+      writing-mode: vertical-rl;
+    }
+
+    .intro { padding: 91px 0 88px; text-align: center; }
+    .section-label {
+      margin-bottom: 11px;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .22em;
+    }
+    .section-title {
+      margin-bottom: 22px;
+      font-family: var(--serif);
+      font-size: clamp(27px, 3.2vw, 38px);
+      font-weight: 500;
+      letter-spacing: .09em;
+      line-height: 1.55;
+    }
+    .intro-copy { max-width: 650px; margin: auto; color: var(--muted); font-size: 13px; }
+    .intro-copy + .intro-copy { margin-top: 5px; }
+
+    .features { padding: 83px 0 102px; background: var(--white); }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; margin-bottom: 35px; }
+    .section-heading .section-title { margin-bottom: 0; }
+    .section-heading .section-label { margin-bottom: 8px; }
+    .heading-note { margin: 0 0 5px; color: var(--muted); font-size: 11px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 23px; }
+    .feature-card { display: block; min-width: 0; color: inherit; text-decoration: none; }
+    .feature-art {
+      display: grid;
+      height: 228px;
+      overflow: hidden;
+      place-items: center;
+      border-radius: 3px;
+      background: #e6eee6;
+    }
+    .feature-art svg { width: 100%; height: 100%; }
+    .feature-card:nth-child(2) .feature-art { background: #f5e9d8; }
+    .feature-card:nth-child(3) .feature-art { background: #e4edf0; }
+    .card-meta { display: flex; align-items: center; gap: 11px; margin: 19px 0 7px; }
+    .card-number { color: var(--coral); font-family: var(--serif); font-size: 13px; }
+    .card-category { color: var(--muted); font-size: 10px; letter-spacing: .12em; }
+    .feature-card h3 { margin-bottom: 8px; font-family: var(--serif); font-size: 20px; font-weight: 500; letter-spacing: .05em; }
+    .feature-card p { margin-bottom: 0; color: var(--muted); font-size: 12px; line-height: 1.9; }
+    .feature-card .card-visit { display: inline-block; margin-top: 12px; color: var(--green); font-size: 11px; font-weight: 700; }
+    .feature-card:hover .card-visit { text-decoration: underline; text-underline-offset: 4px; }
+
+    .walk { padding: 96px 0; }
+    .walk-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 340px;
+      overflow: hidden;
+      background: #e8eee7;
+    }
+    .walk-copy { align-self: center; padding: 50px clamp(28px, 6vw, 75px); }
+    .walk-copy .section-title { margin-bottom: 17px; }
+    .walk-copy p:not(.section-label) { max-width: 400px; margin-bottom: 23px; color: var(--muted); font-size: 12px; }
+    .walk-art { min-height: 340px; }
+    .walk-art svg { display: block; width: 100%; height: 100%; }
+
+    .access { padding: 82px 0 87px; background: #f0eee6; }
+    .access-content { display: grid; grid-template-columns: .8fr 1.2fr; gap: 60px; align-items: center; }
+    .access-content .section-title { margin-bottom: 13px; }
+    .access-lead { color: var(--muted); font-size: 12px; }
+    .access-list { border-top: 1px solid #d5d6ca; }
+    .access-row { display: grid; grid-template-columns: 115px 1fr; gap: 18px; padding: 16px 0; border-bottom: 1px solid #d5d6ca; font-size: 12px; }
+    .access-row strong { color: var(--green-dark); font-weight: 700; }
+    .access-row span { color: #586760; }
+
+    .footer { padding: 37px 0; background: var(--green-dark); color: #f9f8f0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .footer .brand-mark { background: #f6f7f1; color: var(--green-dark); }
+    .footer .brand { font-size: 16px; }
+    .footer-note { margin: 0; color: #d3ded5; font-size: 10px; }
+    .official-link { color: #fffefa; font-size: 11px; text-underline-offset: 4px; }
+    .copyright { margin: 18px 0 0; color: #cad7ce; font-size: 9px; letter-spacing: .04em; }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 40px, 560px); }
+      .site-header { width: calc(100% - 40px); padding: 17px 0; }
+      .brand { font-size: 16px; }
+      .nav { gap: 16px; }
+      .nav a { font-size: 10px; }
+      .nav a:nth-child(3) { display: none; }
+      .hero, .hero-inner { min-height: 690px; }
+      .hero-inner { align-items: flex-start; padding-top: 48px; }
+      .hero-copy { width: 100%; }
+      h1 { font-size: clamp(39px, 11vw, 58px); }
+      .hero-description { max-width: 330px; font-size: 12px; }
+      .hero-art { top: auto; right: -10%; bottom: 0; width: 112%; height: 52%; }
+      .hero-note { right: 17px; bottom: 21px; font-size: 9px; }
+      .intro { padding: 67px 0; }
+      .intro-copy { font-size: 12px; text-align: left; }
+      .features { padding: 68px 0; }
+      .section-heading { display: block; margin-bottom: 27px; }
+      .heading-note { margin-top: 10px; }
+      .feature-grid { grid-template-columns: 1fr; gap: 31px; }
+      .feature-art { height: 230px; }
+      .walk { padding: 65px 0; }
+      .walk-panel { grid-template-columns: 1fr; }
+      .walk-copy { padding: 37px 27px 25px; }
+      .walk-art { min-height: 235px; }
+      .access { padding: 66px 0; }
+      .access-content { grid-template-columns: 1fr; gap: 24px; }
+      .access-row { grid-template-columns: 95px 1fr; gap: 12px; font-size: 11px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="ふなばし日和 ホーム">
+      <span class="brand-mark" aria-hidden="true">ふ</span>
+      <span>ふなばし日和</span>
+    </a>
+    <nav class="nav" aria-label="メインナビゲーション">
+      <a href="#about">船橋のこと</a>
+      <a href="#spots">まちの魅力</a>
+      <a href="#access">アクセス</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">CHIBA · FUNABASHI</p>
+          <h1 id="hero-title">海と街と、<br><span>ちょうどいい</span><br>暮らし。</h1>
+          <p class="hero-description">にぎやかな駅前を抜けたら、海辺の風。いつもの日にも、ふらりと出かける日にも。船橋の好きなところを見つけに行こう。</p>
+          <a class="text-link" href="#about">船橋を知る <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 850 610" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="620" cy="146" r="52" fill="#F4CD74"/>
+          <path d="M0 315c108-40 196-32 294 0 123 40 221 24 316-4 90-26 158-24 240 3v296H0z" fill="#C5D8C9"/>
+          <path d="M0 375c130-25 224-8 334 24 127 36 238 26 335-2 68-20 126-22 181-7v220H0z" fill="#8FB6A8"/>
+          <path d="M0 435c155-25 262-4 375 23 139 33 267 23 375-8 39-11 71-15 100-12v172H0z" fill="#6F9F93"/>
+          <path d="M0 505c150-21 245-8 363 16 153 31 293 18 413-13 30-8 55-12 74-12v114H0z" fill="#477F78"/>
+          <g fill="#F7F1DE">
+            <path d="M480 264h91v116h-91z"/><path d="M493 235h67v29h-67z"/>
+            <path d="M585 291h69v89h-69z"/><path d="M596 270h47v21h-47z"/>
+            <path d="M670 249h105v131H670z"/><path d="M685 219h74v30h-74z"/>
+          </g>
+          <g fill="#6F9F93">
+            <path d="M495 278h11v13h-11zm22 0h11v13h-11zm22 0h11v13h-11zM495 304h11v13h-11zm22 0h11v13h-11zm22 0h11v13h-11z"/>
+            <path d="M599 301h10v12h-10zm20 0h10v12h-10zm-20 22h10v12h-10zm20 0h10v12h-10z"/>
+            <path d="M686 264h13v15h-13zm26 0h13v15h-13zm26 0h13v15h-13zm-52 27h13v15h-13zm26 0h13v15h-13zm26 0h13v15h-13z"/>
+          </g>
+          <path d="M77 432c68-10 110 0 163 16 42 13 83 19 124 16l-20 34c-44 4-77-4-115-16-56-17-94-24-152-14z" fill="#F3E8D0"/>
+          <path d="M93 474h238v10H93z" fill="#D9C9A6"/>
+          <g fill="#315F54">
+            <path d="M183 409c-2-34 7-64 25-83 18 19 28 49 25 83z"/><path d="M185 410c-13-30-13-59 0-81 17 20 24 46 20 76z"/>
+            <path d="M255 443c-2-28 6-51 20-67 15 16 23 39 21 67z"/><path d="M257 443c-11-25-11-47 0-64 14 16 20 36 17 59z"/>
+          </g>
+          <g fill="#FAF7ED">
+            <path d="M342 446c32-5 60-1 84 11-27 13-54 16-82 10l-18-10z"/>
+            <path d="M370 466h5v31h-5z"/><path d="M394 464h4v32h-4z"/>
+          </g>
+          <path d="M345 447l31-18 25 28c-19 7-38 7-56 2z" fill="#E58B6E"/>
+          <path d="M371 430l5-25 6 24z" fill="#F7F1DE"/>
+          <path d="M74 543c112-12 190-1 278 18 115 24 235 20 345-7 55-14 102-18 153-12" fill="none" stroke="#D3E5D9" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+          <path d="M15 568c92-8 155-1 231 13" fill="none" stroke="#D3E5D9" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+        </svg>
+      </div>
+      <span class="hero-note">東京湾の風が吹くまち</span>
+    </section>
+
+    <section class="intro wrap" id="about">
+      <p class="section-label">A LITTLE ABOUT FUNABASHI</p>
+      <h2 class="section-title">いつもの日も、よりみちも。</h2>
+      <p class="intro-copy">千葉県北西部にある船橋市。駅前の活気、広々とした公園、東京湾の景色。</p>
+      <p class="intro-copy">それぞれの魅力が近くにあるから、自分らしい楽しみ方が見つかります。</p>
+    </section>
+
+    <section class="features" id="spots">
+      <div class="wrap">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">FIND YOUR FUNABASHI</p>
+            <h2 class="section-title">船橋の、好きなところ。</h2>
+          </div>
+          <p class="heading-note">まちの表情を、気ままにめぐろう。</p>
+        </div>
+        <div class="feature-grid">
+          <a class="feature-card" href="https://www.park-funabashi.or.jp/and/" target="_blank" rel="noopener noreferrer" aria-label="ふなばしアンデルセン公園の公式サイト（新しいタブで開きます）">
+            <div class="feature-art" aria-hidden="true">
+              <svg viewBox="0 0 360 228" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="276" cy="53" r="23" fill="#F4CD74"/>
+                <path d="M0 129c59-23 111-21 164-1 75 28 123 21 196-4v104H0z" fill="#AFC9B5"/>
+                <path d="M0 162c66-11 116-6 169 11 67 21 121 12 191-11v66H0z" fill="#7FA99A"/>
+                <path d="M40 107h72v67H40zM51 88h50v19H51zM123 123h50v51h-50zM132 108h32v15h-32zM191 98h85v76h-85zM202 81h63v17h-63z" fill="#F9F4E7"/>
+                <path d="M50 119h10v12H50zm20 0h10v12H70zm20 0h10v12H90zm-40 22h10v12H50zm20 0h10v12H70zm20 0h10v12H90zM135 132h9v10h-9zm19 0h9v10h-9zm-19 18h9v10h-9zm19 0h9v10h-9zM203 108h11v12h-11zm22 0h11v12h-11zm22 0h11v12h-11zm-44 22h11v12h-11zm22 0h11v12h-11zm22 0h11v12h-11z" fill="#8AAE9C"/>
+                <path d="M15 176h67" stroke="#F5E9D1" stroke-width="4" stroke-linecap="round"/>
+                <path d="M22 185h91" stroke="#D6E4D7" stroke-width="2"/>
+                <g fill="#3B6C5C"><path d="M298 177c-2-24 4-43 16-56 13 13 19 32 17 56z"/><path d="M300 177c-9-20-9-37 0-51 11 13 16 29 14 47z"/></g>
+              </svg>
+            </div>
+            <div class="card-meta"><span class="card-number">01</span><span class="card-category">PARK & NATURE</span></div>
+            <h3>ふなばしアンデルセン公園</h3>
+            <p>四季の自然や園内の風景を楽しめる、船橋を代表する公園のひとつ。</p>
+            <span class="card-visit">公式サイトを見る ↗</span>
+          </a>
+          <a class="feature-card" href="https://mitsui-shopping-park.com/lalaport/tokyo-bay/" target="_blank" rel="noopener noreferrer" aria-label="ららぽーとTOKYO-BAYの公式サイト（新しいタブで開きます）">
+            <div class="feature-art" aria-hidden="true">
+              <svg viewBox="0 0 360 228" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h360v228H0z" fill="#F4E9D7"/>
+                <path d="M0 151h360v77H0z" fill="#E6D3B4"/>
+                <path d="M45 73h268v122H45z" fill="#F9F5E9"/>
+                <path d="M33 73h293v18H33z" fill="#D08C62"/>
+                <path d="M60 91h237v13H60z" fill="#E7B17D"/>
+                <path d="M77 112h65v83H77z" fill="#88A995"/>
+                <path d="M88 122h44v8H88zm0 18h44v8H88zm0 18h44v8H88z" fill="#EDE9D8"/>
+                <path d="M163 119h114v76H163z" fill="#E8C994"/>
+                <path d="M179 133h17v24h-17zm33 0h17v24h-17zm33 0h17v24h-17z" fill="#7F9D8C"/>
+                <path d="M175 168h91v6h-91z" fill="#F8F1DF"/>
+                <path d="M21 195h318" stroke="#B58A69" stroke-width="3"/>
+                <g fill="#E58B6E"><circle cx="63" cy="57" r="7"/><circle cx="84" cy="57" r="7"/><circle cx="105" cy="57" r="7"/></g>
+                <path d="M41 204h277" stroke="#D1B997" stroke-width="2" stroke-dasharray="4 7"/>
+              </svg>
+            </div>
+            <div class="card-meta"><span class="card-number">02</span><span class="card-category">SHOPPING & LEISURE</span></div>
+            <h3>ららぽーとTOKYO-BAY</h3>
+            <p>ショッピングや食事などを楽しめる、南船橋エリアのお出かけスポット。</p>
+            <span class="card-visit">公式サイトを見る ↗</span>
+          </a>
+          <a class="feature-card" href="https://www.sambanze.jp/" target="_blank" rel="noopener noreferrer" aria-label="ふなばし三番瀬環境学習館の公式サイト（新しいタブで開きます）">
+            <div class="feature-art" aria-hidden="true">
+              <svg viewBox="0 0 360 228" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0h360v228H0z" fill="#E5EEF0"/>
+                <circle cx="270" cy="48" r="25" fill="#F4CD74"/>
+                <path d="M0 127c74-18 122-13 178 5 66 22 114 17 182-5v101H0z" fill="#A6C8C4"/>
+                <path d="M0 163c61-8 105-2 158 13 67 20 123 17 202-6v58H0z" fill="#74A6A3"/>
+                <path d="M71 137h88l-14 21H84z" fill="#F6F0DF"/>
+                <path d="M113 137V98l36 39z" fill="#E58B6E"/>
+                <path d="M116 142v24" stroke="#6E8D88" stroke-width="3"/>
+                <path d="M222 151h76l-12 17h-52z" fill="#FAF4E7"/>
+                <path d="M250 151v-27l25 27z" fill="#F4CD74"/>
+                <path d="M253 155v15" stroke="#6E8D88" stroke-width="3"/>
+                <path d="M29 193c73-9 114-1 163 11 52 13 102 11 145-1" fill="none" stroke="#D8E8E2" stroke-width="2" stroke-linecap="round"/>
+                <path d="M21 208c53-4 82 0 118 8" fill="none" stroke="#D8E8E2" stroke-width="2" stroke-linecap="round"/>
+                <path d="M197 96c14-13 26-13 40 0-14-4-26-4-40 0z" fill="#fffefa"/>
+                <path d="M192 103c8-7 15-7 23 0-8-2-15-2-23 0z" fill="#fffefa"/>
+              </svg>
+            </div>
+            <div class="card-meta"><span class="card-number">03</span><span class="card-category">BAY & LEARNING</span></div>
+            <h3>ふなばし三番瀬環境学習館</h3>
+            <p>東京湾の自然や三番瀬について、楽しみながら学べる施設です。</p>
+            <span class="card-visit">公式サイトを見る ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="walk">
+      <div class="wrap walk-panel">
+        <div class="walk-copy">
+          <p class="section-label">A DAY IN FUNABASHI</p>
+          <h2 class="section-title">今日は、少しだけ<br>遠まわり。</h2>
+          <p>予定を決めすぎず、気になる景色を追いかける。何気ない一日が、船橋らしい思い出になるかもしれません。</p>
+          <a class="text-link" href="#access">お出かけのヒント <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="walk-art" aria-hidden="true">
+          <svg viewBox="0 0 560 340" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 0h560v340H0z" fill="#DCE8DC"/>
+            <circle cx="420" cy="75" r="37" fill="#F4CD74"/>
+            <path d="M0 219c80-55 153-63 227-24 75 40 126 36 193-10 56-38 102-42 140-29v184H0z" fill="#A4C1A9"/>
+            <path d="M0 266c96-30 170-28 245-3 81 27 166 26 315-25v102H0z" fill="#769F8C"/>
+            <path d="M0 305c111-23 185-12 273 8 103 23 176 8 287-23v50H0z" fill="#567F6F"/>
+            <path d="M37 273c72-32 111-35 177-20 52 12 85 11 138-9" fill="none" stroke="#F6F0DF" stroke-width="11" stroke-linecap="round"/>
+            <path d="M63 263c51-21 85-22 129-11" fill="none" stroke="#D1B89A" stroke-width="2" stroke-dasharray="5 9"/>
+            <g fill="#315F54">
+              <path d="M91 240c-3-41 7-76 27-98 20 22 30 57 27 98z"/><path d="M93 241c-15-35-15-67 0-92 19 23 27 53 23 86z"/>
+              <path d="M467 228c-2-31 6-57 21-74 16 17 24 43 22 74z"/><path d="M468 229c-12-27-12-50 0-69 14 17 20 40 17 64z"/>
+            </g>
+            <path d="M218 239c24-14 45-18 68-12l36 14-13 18-68-4z" fill="#E58B6E"/>
+            <circle cx="250" cy="224" r="12" fill="#E7B891"/>
+            <path d="M248 237l-8 37m27-35 10 31m-35-18 29 5" stroke="#324E47" stroke-width="7" stroke-linecap="round"/>
+            <path d="M257 211c-6-10-4-21 5-24 11-3 16 5 13 14l-7 9z" fill="#315F54"/>
+            <path d="M306 242c21-10 38-9 55-1" fill="none" stroke="#F7F1DE" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="access" id="access">
+      <div class="wrap access-content">
+        <div>
+          <p class="section-label">GETTING AROUND</p>
+          <h2 class="section-title">船橋への、<br>お出かけメモ。</h2>
+          <p class="access-lead">船橋市内には複数の鉄道路線が通っています。<br>出発前に最新の運行情報をご確認ください。</p>
+        </div>
+        <div class="access-list">
+          <div class="access-row"><strong>市内の駅</strong><span>船橋・西船橋・南船橋・船橋日大前 など</span></div>
+          <div class="access-row"><strong>市内の移動</strong><span>目的地に合わせて鉄道やバスをご利用ください</span></div>
+          <div class="access-row"><strong>お出かけ前に</strong><span>施設の営業状況・交通情報は公式情報をご確認ください</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-inner">
+        <a class="brand" href="#" aria-label="ふなばし日和 ホーム">
+          <span class="brand-mark" aria-hidden="true">ふ</span>
+          <span>ふなばし日和</span>
+        </a>
+        <p class="footer-note">船橋のまちを、あなたらしいペースで。</p>
+        <a class="official-link" href="https://www.city.funabashi.lg.jp/" target="_blank" rel="noopener noreferrer">船橋市公式サイト ↗</a>
+      </div>
+      <p class="copyright">このページのイラストは、AIで生成したオリジナルSVGです。外部の画像素材は使用していません。&copy; 2026 ふなばし日和</p>
+    </div>
+  </footer>
+</body>
+</html>
